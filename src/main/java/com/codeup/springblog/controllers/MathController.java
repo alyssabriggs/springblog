@@ -30,7 +30,11 @@ public class MathController {
 
     @GetMapping("/divide/{num1}/by/{num2}")
     @ResponseBody
-    public int divide(@PathVariable int num1 , @PathVariable int num2){
-        return num1 / num2;
+    public int divide(@PathVariable int num1 , @PathVariable int num2) throws ArithmeticException{
+        if (num1 == 0 || num2 == 0){
+            throw new ArithmeticException("Dividing by 0 is not allowed!");
+        } else {
+            return num1 / num2;
+        }
     }
 }
