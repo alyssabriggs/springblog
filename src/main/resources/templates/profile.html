@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+</head>
+<body>
+<navbar th:replace="partials/navbar :: main-nav"></navbar>
+<h1>Welcome, <span th:text="${username}"> </span>!</h1>
+<div>
+    <ul th:each="item: ${shoppingCart}">
+        <li th:text="${item}"></li>
+    </ul>
+</div>
+
+<div class="dashboard" th:if="${isAdmin}">
+    Displaying your dashboard...
+</div>
+<footer th:replace="partials/footer :: footer"></footer>
+</body>
+</html>
