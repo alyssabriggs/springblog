@@ -30,6 +30,12 @@ public class PostController {
         return "posts/edit";
     }
 
+    @GetMapping("/posts/{id}/history")
+    public String returnTestView(@PathVariable long id, Model viewModel) {
+        viewModel.addAttribute("post", postDao.getOne(id));
+        return "posts/history";
+    }
+
     @PostMapping("/posts/{id}/edit")
     public String updatePost(@PathVariable long id, @RequestParam String title, @RequestParam String body){
         Post p = new Post(
