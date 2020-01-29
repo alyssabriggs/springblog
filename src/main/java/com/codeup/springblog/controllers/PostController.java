@@ -47,10 +47,10 @@ public class PostController {
         return "posts/show";
     }
 
-    @GetMapping("/posts/{id}/delete")
+    @PostMapping("/posts/{id}/delete")
     public String deletePost(@PathVariable long id){
-        Post post1 = postDao.getOne(id);
-        postDao.delete(post1);
+        System.out.println("Does this run?");
+        postDao.deleteById(id);
         return "redirect:/posts";
     }
 
