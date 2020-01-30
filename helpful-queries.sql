@@ -7,6 +7,7 @@ show tables;
 describe posts;
 describe post_details;
 
+DROP table post_image;
 
 
 select * from posts;

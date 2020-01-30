@@ -6,8 +6,11 @@
 </head>
 <body>
 	<div th:each="post: ${posts}">
+		<ul th:each="image : ${post.images}">
 		<h1 th:text="${post.title}"></h1>
 		<p th:text="${post.body}"></p>
+		<p><img th:src="${image.url}" alt="cats" height="50%" width="50%"></p>
+		</ul>
 	</div>
 </body>
 </html>
