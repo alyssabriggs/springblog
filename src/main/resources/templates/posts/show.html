@@ -8,5 +8,6 @@
 	<h1 th:text="${post.title}"></h1>
 	<p th:text="${post.body}"></p>
 	<p> Posted By: <span th:text="${post.user.email}"></span></p>
+	<a th:href="@{${post.id} + '/edit'}" type="submit">Update Post</a>
 </body>
 </html>

@@ -6,7 +6,7 @@
 </head>
 <body>
 	<div th:each="post: ${posts}">
-		<h1 th:text="${post.title}"></h1>
+		<a th:href="@{'posts/'+ ${post.id}}"><span th:text="${post.title}"></span></a>
 		<p th:text="${post.body}"></p>
 		<p th:text="${post.user.email}"></p>
 	</div>
