@@ -1,7 +1,9 @@
 package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.models.Post;
+import com.codeup.springblog.models.User;
 import com.codeup.springblog.repositories.PostRepository;
+import com.codeup.springblog.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,14 +15,17 @@ import java.util.List;
 public class PostController {
 
     private PostRepository postDao;
+    private UserRepository userDao;
 
-    public PostController(PostRepository postDao) {
+    public PostController(PostRepository postDao, UserRepository userDao) {
         this.postDao = postDao;
+        this.userDao = userDao;
     }
 
     @GetMapping("/posts")
     public String postsIndex(Model model){
         model.addAttribute("posts", postDao.findAll());
+        model.addAttribute("users", userDao.findAll());
         return "posts/index";
     }
 
@@ -55,18 +60,21 @@ public class PostController {
     }
 
 
+    @GetMapping("/posts/create")
+    public String createPostForm(){
+        return "posts/create";
+    }
 
-//    @GetMapping("/posts/create")
-//    @ResponseBody
-//
-//    public String createPostForm(){
-//        return "View form for creating a post";
-//    }
-//
-//    @PostMapping("/posts/create")
-//    @ResponseBody
-//
-//    public String submitPost(){
-//        return "create a new post";
-//    }
+
+    @PostMapping("/posts/create")
+    public String submitPost(
+            @RequestParam String title,
+            @RequestParam String body
+    ){
+        Post post = new Post(title, body);
+        User user = userDao.getOne(1L);
+        post.setUser(user);
+        postDao.save(post);
+        return "redirect:/posts/" + post.getId();
+    }
 }
