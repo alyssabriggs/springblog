@@ -1,5 +1,7 @@
 package com.codeup.springblog.models;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -11,10 +13,10 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	@Column
+	@Column(unique = true)
 	private String username;
 
-	@Column
+	@Column(unique = true)
 	private String email;
 
 	@Column
@@ -31,6 +33,13 @@ public class User {
 		this.username = username;
 		this.email = email;
 		this.password = password;
+	}
+
+	public User(User copy) {
+		id = copy.id; // This line is SUPER important! Many things won't work if it's absent
+		email = copy.email;
+		username = copy.username;
+		password = copy.password;
 	}
 
 	public long getId() {

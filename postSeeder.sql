@@ -11,5 +11,5 @@ INSERT into posts(body, title, user_id)
 VALUES
        ('Here is post 1', 'Post 1', 1),
        ('Here is post 2', 'Post 2', 1),
-       ('Here is post 3', 'Post 3', 2),
-       ('Here is post 4', 'Post 4', 2);
+       ('Here is post 3', 'Post 3', 1),
+       ('Here is post 4', 'Post 4', 1);

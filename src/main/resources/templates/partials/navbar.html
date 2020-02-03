@@ -1,17 +1,35 @@
+
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 <head>
 	<meta charset="UTF-8">
 	<title>Navbar</title>
 </head>
 <body>
-	<navbar th:fragment="main-nav">
-		<ul>
-			<li>Home</li>
-			<li>About</li>
-			<li>Portfolio</li>
-			<li>Contact</li>
+<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<a class="navbar-brand" th:href="@{../landing}">Spring Blog</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarNav">
+		<ul class="navbar-nav">
+			<li class="nav-item">
+				<a class="nav-link" th:href="@{/posts}">Posts</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" th:href="@{/posts/create}">Create Post</a>
+			</li>
+			<li class="nav-item ml-auto" sec:authorize="!isAuthenticated()">
+				<a class="nav-link" th:href="@{/login}">Login</a>
+			</li>
+			<li class="nav-item ml-auto" sec:authorize="!isAuthenticated()">
+				<a class="nav-link" th:href="@{/sign-up}">Sign Up</a>
+			</li>
 		</ul>
-	</navbar>
+	</div>
+	<form class="form-inline my-2 mt-n1" th:action="@{/logout}" th:method="post" sec:authorize="isAuthenticated()">
+		<button type="submit" class="btn-link btn nav-link" style="margin-top: 8px">Logout</button>
+	</form>
+</nav>
 </body>
 </html>

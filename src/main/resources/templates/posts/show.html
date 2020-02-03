@@ -1,13 +1,23 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="partials/header :: header(${'Showing Post'})">
 	<meta charset="UTF-8">
 	<title>Viewing Post</title>
 </head>
 <body>
-	<h1 th:text="${post.title}"></h1>
-	<p th:text="${post.body}"></p>
-	<p> Posted By: <span th:text="${post.user.email}"></span></p>
-	<a th:href="@{${post.id} + '/edit'}" type="submit">Update Post</a>
+<div th:replace="partials/navbar :: navbar"></div>
+<div class="container">
+<div class="card text-center mt-2">
+<div class="card-body">
+	<h5 class="card-title" th:text="${post.title}"></h5>
+	<p class="card-text" th:text="${post.body}"></p>
+	<a th:href="@{${post.id} + '/edit'}" type="submit" class="btn btn-important">Update Post</a>
+</div>
+	<div class="card-footer text-muted">
+		Posted By: <span th:text="${post.user.email}"></span>
+	</div>
+</div>
+</div>
+<th:block th:replace="partials/scripts :: scripts" />
 </body>
 </html>

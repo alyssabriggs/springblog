@@ -1,14 +1,25 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="partials/header :: header(${'Login Page'})">
 	<meta charset="UTF-8">
 	<title>Posts Index</title>
 </head>
 <body>
-	<div th:each="post: ${posts}">
-		<a th:href="@{'posts/'+ ${post.id}}"><span th:text="${post.title}"></span></a>
-		<p th:text="${post.body}"></p>
-		<p th:text="${post.user.email}"></p>
+<div th:replace="partials/navbar :: navbar"></div>
+<div class="container">
+	<h1 class="d-flex justify-content-center">Showing All Posts:</h1>
+		<div class="card text-center mt-2"  th:each="post: ${posts}">
+		<div class="card-body">
+			<h5 class="card-title">
+		<a th:href="@{'/posts/'+ ${post.id}}"><span th:text="${post.title}"></span></a>
+			</h5>
+			<p class="card-text" th:text="${post.body}"></p>
 	</div>
+		<div class="card-footer text-muted">
+			Posted By: <span th:text="${post.user.email}"></span>
+		</div>
+	</div>
+</div>
+	<th:block th:replace="partials/scripts :: scripts" />
 </body>
 </html>
